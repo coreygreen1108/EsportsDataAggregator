@@ -1,21 +1,23 @@
+<!-- Please note that hardcoded HTML/Jquery will be replaced -->
 <!DOCTYPE html>
 <html>
 	<head>
-
+	<script src="./jquery-3.1.1.js"></script>
+	<script src="./main.js"></script>
 	</head>
 	<body>
-		<h1> Smite Tool </h1>
-		<p> What up Loser! </p>
+		<h1> Smite Visualization Tool </h1>
+		<p> What up! </p>
 		<form action="/godinfo" method="get">
 			<div>
-				<select name="Console">
+				<select id="console" name="Console">
 					<option value="PC">PC</option>
 					<option value="Xbox">Xbox</option>
 					<option value="PS4">PS4</option>
 				</select>
 			</div>
 			<div>
-				<select name="Command">
+				<select id="command" name="Command">
 					<option value="getgodranks">Get God Rankings</option>
 					<option value="getfriends">Get Friends</option>
 					<option value="getmatchhistory">Get Match History</option>
@@ -23,9 +25,9 @@
 				</select>
 			</div>	
 			<div>
-				<input type="text" name="target" placeholder="Enter Player Target">
+				<input id="target" type="text" name="target" placeholder="Enter Player Target">
 			</div>
-			<input type="submit" value="Submit">
+			<button type="button" id="search">Find Data!</button>
 		</form>
 	</body>
 </html>
