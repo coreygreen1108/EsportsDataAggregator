@@ -14,6 +14,8 @@ server.use('/', express.static(__dirname + '/../public'));
 
 server.use('/godinfo', require('./routes/godinfo'));
 
+// server.use('/matchinfo', require('./routes/matchinfo'));
+
 server.get('/', function(req, res){
 	res.render('index.html');
 })
