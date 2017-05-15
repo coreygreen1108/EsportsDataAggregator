@@ -2,13 +2,17 @@
 
 let express = require('express');
 let server = express();
-//let db = require('./db');
-//let User = require('./db/user.model');
+let db = require('../db');
 
+console.log(db.God);
 
-server.listen(8080, function(req, res){
-		console.log('dis server is live on port 8080 maaannnn (Jamaican accent)')
+db.sync()
+.then(function(){
+	return server.listen(8080);
+}).then(function(){
+	console.log('dis server is live on port 8080 maaannnn (Jamaican accent)');
 });
+
 
 server.use('/', express.static(__dirname + '/../public'));
 
