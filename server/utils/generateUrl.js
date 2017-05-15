@@ -23,37 +23,15 @@ function createUrl(session, system, command = 'createsession', type = 'Json', ta
 		+ signature + '/' 
 		+ session + '/' 
 		+ currentTime;
-	// targetName = '426/' + date + '/20'
-	if(targetName) url += ('/' + targetName); 
+	if(targetName) url += ('/' + targetName);
+	if(command === 'getmatchidsbyqueue'){
+		url += ('/' + date + '/' + (Number(currentTime.slice(8, 10)) - 2));
+	} else if(command === 'getgods'){
+		url += ('/1');
+	}
+	console.log('date', date);
+	console.log('url', url);
 	return url; 
-	// return ("http://api.xbox.smitegame.com/smiteapi.svc/" + command + type + '/'
-	// 	+ devId + '/' 
-	// 	+ signature + '/' 
-	// 	+ session + '/' 
-	// 	+ currentTime + '/' 
-	// 	+ targetName); 
 }
 
 module.exports = createUrl; 
-
-
-// {
-// "Active_Flag": "y",
-// "Match": "120076634",
-// "ret_msg": null
-// },
-// {
-// "Active_Flag": "y",
-// "Match": "120078527",
-// "ret_msg": null
-// },
-// {
-// "Active_Flag": "y",
-// "Match": "120079421",
-// "ret_msg": null
-// },
-// {
-// "Active_Flag": "y",
-// "Match": "120081414",
-// "ret_msg": null
-// },
