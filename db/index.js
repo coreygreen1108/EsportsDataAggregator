@@ -1,5 +1,5 @@
 var db = require('./_db');
 
-var User = require('./user.model');
+var God = require('./models/God');
 
 module.exports = db;
