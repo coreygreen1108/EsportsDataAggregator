@@ -6,7 +6,7 @@ let db = require('../db');
 
 console.log(db.God);
 
-db.sync()
+db.sync({force: true})
 .then(function(){
 	return server.listen(8080);
 }).then(function(){
