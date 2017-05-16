@@ -8,11 +8,10 @@ var GodInfo = db.define('GodInfo', {
     primaryKey: true
   },
   patchNumber: Sequelize.INTEGER,
-  Info: {
+  info: {
     type: Sequelize.JSONB
   }
 });
 
 module.exports = GodInfo;
-
 
