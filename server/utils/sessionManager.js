@@ -17,15 +17,15 @@ manager.createSession = function(){
 	})
 }
 
-manager.makeRequest = function(system, type, output, target){
+manager.makeRequest = function(system, method, output, additionalData){
 	if(!manager.currentSession){
 		return manager.createSession()
 		.then(function(sessionId){
 			manager.sessionTimer(); 
-			return request({url: generateUrl(manager.currentSession, system, type, output, target), json: true});
+			return request({url: generateUrl(manager.currentSession, system, method, output, additionalData), json: true});
 		})
 	} else {
-		return request({url: generateUrl(manager.currentSession, system, type, output, target), json: true}); 
+		return request({url: generateUrl(manager.currentSession, system, method, output, additionalData), json: true}); 
 	}
 }
 
