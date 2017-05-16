@@ -3,6 +3,7 @@ var md5 = require('crypto-md5');
 const env = require('../env/development.js');
 const devId = env.SMITE.devId; 
 const authKey = env.SMITE.accessKey;
+const defaultData = require('./smiteAPIDefaultMethodData');
 
 function parseDate(date){
 	let newDate = date.toISOString().replace(/[-:,TZ]/g, '');
@@ -10,11 +11,10 @@ function parseDate(date){
 	return newDate; 
 }
 
-function createUrl(session, system, command = 'createsession', type = 'Json', targetName){
+function createUrl(session, system, command = 'createsession', type = 'Json', additionalData){
 	var d = new Date();
 	let currentTime = parseDate(d);
 	let date = currentTime.slice(0, 8);
-	console.log(d, currentTime, date);
 	const signature = md5(devId + command + authKey + currentTime, 'hex');
 
 	if(!arguments.length) return ("http://api.xbox.smitegame.com/smiteapi.svc/createsessionJson/" + devId + '/' + signature + '/' + currentTime);
@@ -23,14 +23,13 @@ function createUrl(session, system, command = 'createsession', type = 'Json', ta
 		+ signature + '/' 
 		+ session + '/' 
 		+ currentTime;
-	if(targetName) url += ('/' + targetName);
-	if(command === 'getmatchidsbyqueue'){
-		url += ('/' + date + '/' + (Number(currentTime.slice(8, 10)) - 2));
-	} else if(command === 'getgods'){
-		url += ('/1');
+
+	if(additionalData && defaultData[command]){
+		defaultData[command].format.forEach(elem => {
+			url += ('/' + additionalData[elem]);
+		})
 	}
-	console.log('date', date);
-	console.log('url', url);
+
 	return url; 
 }
 
