@@ -7,7 +7,7 @@
 	</head>
 	<body>
 		<h1> Smite Visualization Tool </h1>
-		<p> What up! </p> 
+		<p> What up! </p>
 		<form action="/godinfo" method="get">
 			<div>
 				<select id="console" name="Console">
@@ -23,11 +23,13 @@
 					<option value="getmatchhistory">Get Match History</option>
 					<option value="getmatchhistory">Get Player</option>
 				</select>
-			</div>	
+			</div>
 			<div>
 				<input id="target" type="text" name="target" placeholder="Enter Player Target">
 			</div>
 			<button type="button" id="search">Find Data!</button>
 		</form>
+		<div id="main"></div>
+		  <script defer src='/bundle.js'></script>
 	</body>
 </html>
