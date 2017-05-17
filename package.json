@@ -6,7 +6,8 @@
   "scripts": {
     "start": "nodemon server/main.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "build": "webpack",
+    "build-watch": "npm run build -- -w"
   },
   "keywords": [],
   "author": "",
