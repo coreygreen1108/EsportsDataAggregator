@@ -2,8 +2,8 @@
 
 let router = require('express').Router();
 let request = require('request-promise');
-let sessionManager = require('../../utils/sessionManager');
-let updateGodApiInterface = require('../../utils/updateGodModel');
+let sessionManager = require('../../../utils/sessionManager');
+let updateGodApiInterface = require('../../../utils/updateGodModel');
 
 module.exports = router; 
 
