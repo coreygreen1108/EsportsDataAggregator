@@ -4,7 +4,7 @@ let express = require('express');
 let server = express();
 let db = require('../db');
 
-db.sync()
+db.sync({force: true})
 .then(function(){
 	return server.listen(8080);
 }).then(function(){
@@ -16,7 +16,7 @@ server.use('/', express.static(__dirname + '/../public'));
 
 //server.use('/godinfo', require('./routes/godinfo'));
 
-server.use('/smiteAPI', require('./routes/smiteAPI'));
+server.use('/api', require('./routes/api'));
 
 // server.use('/matchinfo', require('./routes/matchinfo'));
 

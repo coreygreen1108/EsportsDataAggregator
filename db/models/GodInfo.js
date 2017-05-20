@@ -7,7 +7,7 @@ var GodInfo = db.define('GodInfo', {
     autoIncrement: true,
     primaryKey: true
   },
-  patchNumber: Sequelize.INTEGER,
+  patchNumber: Sequelize.FLOAT,
   info: {
     type: Sequelize.JSONB
   }
