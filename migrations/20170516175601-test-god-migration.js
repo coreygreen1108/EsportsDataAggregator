@@ -9,7 +9,7 @@ module.exports = {
       var god = yield db.model('God').create({
         name: 'Terra'
       })
-      console.log(god); 
+      return 'hi';
     })
     /*
       Add altering commands here.

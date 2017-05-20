@@ -19,5 +19,8 @@ module.exports = {
 	}, 
 	getmatchhistory: {
 		format: ['player']
+	},
+	getplayer: {
+		format: ['playerName']
 	}
 }
