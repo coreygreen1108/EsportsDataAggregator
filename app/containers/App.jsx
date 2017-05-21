@@ -1,12 +1,29 @@
 'use strict';
 import React from 'react';
 import {ConsoleSelector, CommandSelector} from '../components/Selector';
+import {connect} from 'react-redux';
 import {consoles, commands} from '../constants';
+import {receiveingCommand} from '../action-creators/command';
 
+const mapStateToProps = store => {
+  return {
+    selectedCommand: store.command.selectedCommand
+  };
+};
 
-export default class App extends React.Component  {
-   constructor(){
-    super();
+const mapDispatchToProps = dispatch => {
+
+  return {
+      receiveingCommand(selectedCommand) {
+        dispatch(receiveingCommand(selectedCommand));
+      }
+    };
+
+};
+
+class App extends React.Component  {
+   constructor(props){
+    super(props);
     this.state = {selectedConsole: 'PC', selectedCommand: 'getgodranks', target: ''};
     this.onChangeHandlerConsole = this.onChangeHandlerConsole.bind(this);
     this.onChangeHandlerCommand = this.onChangeHandlerCommand.bind(this);
@@ -20,6 +37,7 @@ export default class App extends React.Component  {
 
   onChangeHandlerCommand(event) {
     // const contentVal = event.target.value;
+    this.props.receiveingCommand(event.target.value);
     this.setState({selectedCommand: event.target.value});
   }
 
@@ -30,7 +48,7 @@ export default class App extends React.Component  {
 
    render() {
 
-    console.log(this.state);
+    console.log(this.props.selectedCommand);
 
     return (
 
@@ -57,5 +75,5 @@ export default class App extends React.Component  {
 
 }
 
-
+export default connect(mapStateToProps, mapDispatchToProps)(App);
 
