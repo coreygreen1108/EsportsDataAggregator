@@ -1,4 +1,4 @@
-export const consoles = ["PC", "Xbox", "PS4"];
+export const systems = ["PC", "Xbox", "PS4"];
 export const commands = ["getgodranks", "getfriends", "getmatchhistory"];
 
 export const RECEIVE_COMMAND = 'RECEIVE_COMMAND';

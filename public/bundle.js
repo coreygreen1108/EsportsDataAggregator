@@ -4947,7 +4947,7 @@ if (process.env.NODE_ENV !== 'production' && typeof isCrushed.name === 'string' 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var consoles = exports.consoles = ["PC", "Xbox", "PS4"];
+var systems = exports.systems = ["PC", "Xbox", "PS4"];
 var commands = exports.commands = ["getgodranks", "getfriends", "getmatchhistory"];
 
 var RECEIVE_COMMAND = exports.RECEIVE_COMMAND = 'RECEIVE_COMMAND';
@@ -11990,6 +11990,8 @@ var _react2 = _interopRequireDefault(_react);
 
 var _Selector = __webpack_require__(114);
 
+var _Selector2 = _interopRequireDefault(_Selector);
+
 var _reactRedux = __webpack_require__(66);
 
 var _constants = __webpack_require__(39);
@@ -11998,15 +12000,17 @@ var _command = __webpack_require__(113);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var mapStateToProps = function mapStateToProps(store) {
+var mapStateToProps = function mapStateToProps(state) {
   return {
-    selectedCommand: store.command.selectedCommand
+    selectedCommand: state.command.selectedCommand
   };
 };
 
@@ -12027,25 +12031,16 @@ var App = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.state = { selectedConsole: 'PC', selectedCommand: 'getgodranks', target: '' };
-    _this.onChangeHandlerConsole = _this.onChangeHandlerConsole.bind(_this);
-    _this.onChangeHandlerCommand = _this.onChangeHandlerCommand.bind(_this);
+    _this.state = { system: 'PC', command: 'getgodranks', target: '' };
+    _this.onChangeHandler = _this.onChangeHandler.bind(_this);
     _this.onSubmitHandler = _this.onSubmitHandler.bind(_this);
     return _this;
   }
 
   _createClass(App, [{
-    key: 'onChangeHandlerConsole',
-    value: function onChangeHandlerConsole(event) {
-      // const contentVal = event.target.value;
-      this.setState({ selectedConsole: event.target.value });
-    }
-  }, {
-    key: 'onChangeHandlerCommand',
-    value: function onChangeHandlerCommand(event) {
-      // const contentVal = event.target.value;
-      this.props.receiveingCommand(event.target.value);
-      this.setState({ selectedCommand: event.target.value });
+    key: 'onChangeHandler',
+    value: function onChangeHandler(event) {
+      this.setState(_defineProperty({}, event.target.name, event.target.value));
     }
   }, {
     key: 'onSubmitHandler',
@@ -12055,8 +12050,6 @@ var App = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
-
-      console.log(this.props.selectedCommand);
 
       return _react2.default.createElement(
         'div',
@@ -12072,12 +12065,12 @@ var App = function (_React$Component) {
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(_Selector.ConsoleSelector, { consoles: _constants.consoles, onChangeHandlerConsole: this.onChangeHandlerConsole })
+            _react2.default.createElement(_Selector2.default, { dataArr: _constants.systems, name: 'system', onChangeHandler: this.onChangeHandler })
           ),
           _react2.default.createElement(
             'div',
             null,
-            _react2.default.createElement(_Selector.CommandSelector, { commands: _constants.commands, onChangeHandlerCommand: this.onChangeHandlerCommand })
+            _react2.default.createElement(_Selector2.default, { dataArr: _constants.commands, name: 'command', onChangeHandler: this.onChangeHandler })
           ),
           _react2.default.createElement(
             'div',
@@ -12229,7 +12222,6 @@ var receiveingCommand = exports.receiveingCommand = function receiveingCommand(c
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.CommandSelector = exports.ConsoleSelector = undefined;
 
 var _react = __webpack_require__(6);
 
@@ -12237,35 +12229,22 @@ var _react2 = _interopRequireDefault(_react);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var ConsoleSelector = exports.ConsoleSelector = function ConsoleSelector(props) {
+var Selector = function Selector(props) {
 
   return _react2.default.createElement(
     'select',
-    { id: 'console', name: 'Console', onChange: props.onChangeHandlerConsole },
-    props.consoles && props.consoles.map(function (console) {
+    { id: props.name, name: props.name, onChange: props.onChangeHandler },
+    props.dataArr && props.dataArr.map(function (val) {
       return _react2.default.createElement(
         'option',
-        { key: console, value: console },
-        console.toUpperCase()
+        { key: val, value: val },
+        val.toUpperCase()
       );
     })
   );
 };
 
-var CommandSelector = exports.CommandSelector = function CommandSelector(props) {
-
-  return _react2.default.createElement(
-    'select',
-    { id: 'console', name: 'Console', onChange: props.onChangeHandlerCommand },
-    props.commands && props.commands.map(function (command) {
-      return _react2.default.createElement(
-        'option',
-        { key: command, value: command },
-        command.toUpperCase()
-      );
-    })
-  );
-};
+exports.default = Selector;
 
 // <div>
 //              <select id="command" name="Command">

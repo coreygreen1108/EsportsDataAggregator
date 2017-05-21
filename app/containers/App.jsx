@@ -1,13 +1,13 @@
 'use strict';
 import React from 'react';
-import {ConsoleSelector, CommandSelector} from '../components/Selector';
+import Selector from '../components/Selector';
 import {connect} from 'react-redux';
-import {consoles, commands} from '../constants';
+import {systems, commands} from '../constants';
 import {receiveingCommand} from '../action-creators/command';
 
-const mapStateToProps = store => {
+const mapStateToProps = state => {
   return {
-    selectedCommand: store.command.selectedCommand
+    selectedCommand: state.command.selectedCommand
   };
 };
 
@@ -24,21 +24,13 @@ const mapDispatchToProps = dispatch => {
 class App extends React.Component  {
    constructor(props){
     super(props);
-    this.state = {selectedConsole: 'PC', selectedCommand: 'getgodranks', target: ''};
-    this.onChangeHandlerConsole = this.onChangeHandlerConsole.bind(this);
-    this.onChangeHandlerCommand = this.onChangeHandlerCommand.bind(this);
+    this.state = {system: 'PC', command: 'getgodranks', target: ''};
+    this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
    }
 
-  onChangeHandlerConsole(event) {
-    // const contentVal = event.target.value;
-    this.setState({selectedConsole: event.target.value});
-  }
-
-  onChangeHandlerCommand(event) {
-    // const contentVal = event.target.value;
-    this.props.receiveingCommand(event.target.value);
-    this.setState({selectedCommand: event.target.value});
+  onChangeHandler(event) {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   onSubmitHandler(event){
@@ -48,18 +40,16 @@ class App extends React.Component  {
 
    render() {
 
-    console.log(this.props.selectedCommand);
-
     return (
 
      <div>
         <h1>Esports Advanced Stats</h1>
           <form action="/godinfo" method="get" onSubmit={this.onSumbitHandler}>
             <div>
-              <ConsoleSelector consoles={consoles} onChangeHandlerConsole={this.onChangeHandlerConsole} />
+              <Selector dataArr={systems} name={'system'} onChangeHandler={this.onChangeHandler} />
             </div>
             <div>
-              <CommandSelector commands={commands} onChangeHandlerCommand={this.onChangeHandlerCommand} />
+               <Selector dataArr={commands} name={'command'} onChangeHandler={this.onChangeHandler} />
             </div>
             <div>
               <input id="target" type="text" name="target" placeholder="Enter Player Target" />
