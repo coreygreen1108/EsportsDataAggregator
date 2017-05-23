@@ -1,9 +1,16 @@
 'use strict';
 import React from 'react';
 import {render} from 'react-dom';
-import SomeThing from './containers/App';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store';
+import App from './containers/App';
 
 render(
-    <SomeThing />,
+  <Provider store={store}>
+    <Router >
+      <Route path="/" component={App} />
+    </Router>
+  </Provider>,
     document.getElementById('main')
 );
