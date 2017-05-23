@@ -10,6 +10,10 @@ var God = db.define('God', {
 	name: {
 		type: Sequelize.STRING,
 		allowNull: false
+	},
+	smite_id: {
+		type: Sequelize.INTEGER,
+		allowNull: false 
 	}
 });
 

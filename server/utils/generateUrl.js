@@ -26,7 +26,7 @@ function createUrl(session, system, command = 'createsession', type = 'Json', ad
 
 	if(additionalData && defaultData[command]){
 		defaultData[command].format.forEach(elem => {
-			url += ('/' + additionalData[elem]);
+			url += ('/' + (additionalData[elem] || defaultData[elem]));
 		})
 	}
 

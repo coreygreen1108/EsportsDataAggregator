@@ -17,7 +17,8 @@ module.exports = async function(){
 	var newGods = [];
 	for(var i = 0; i < gods.length; i++){
 		var god = await God.create({
-			name: gods[i].Name 
+			name: gods[i].Name,
+			smite_id: gods[i].id 
 		})
 		var godInfo = await GodInfo.create({
 			patchNumber: 4,

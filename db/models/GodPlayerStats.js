@@ -15,8 +15,8 @@ var GodPlayerStats = db.define('GodPlayerStats', {
   deaths: Sequelize.INTEGER,
   assists: Sequelize.INTEGER,
   goldEarned: Sequelize.INTEGER,
-  goldEarnedPerMin: Sequelize.INTEGER,
-  finalLevel: Sequelize.INTEGER
+  goldEarnedPerMin: Sequelize.FLOAT,
+  finalLevel: Sequelize.FLOAT
 });
 
 module.exports = GodPlayerStats;
