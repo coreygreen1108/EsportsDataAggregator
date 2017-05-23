@@ -12246,15 +12246,6 @@ var Selector = function Selector(props) {
 
 exports.default = Selector;
 
-// <div>
-//              <select id="command" name="Command">
-//                <option value="getgodranks">Get God Rankings</option>
-//                <option value="getfriends">Get Friends</option>
-//                <option value="getmatchhistory">Get Match History</option>
-//                <option value="getmatchhistory">Get Player</option>
-//              </select>
-//            </div>
-
 /***/ }),
 /* 115 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -12326,6 +12317,7 @@ exports.default = function () {
 
 var _constants = __webpack_require__(39);
 
+// TODO remove selectedCommand, it is temporary placeholder
 var initialState = {
   selectedCommand: ''
 };

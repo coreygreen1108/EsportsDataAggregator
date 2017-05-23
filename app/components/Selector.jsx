@@ -13,14 +13,3 @@ const Selector = (props) => {
 };
 
 export default Selector;
-
- // <div>
- //              <select id="command" name="Command">
- //                <option value="getgodranks">Get God Rankings</option>
- //                <option value="getfriends">Get Friends</option>
- //                <option value="getmatchhistory">Get Match History</option>
- //                <option value="getmatchhistory">Get Player</option>
- //              </select>
- //            </div>
-
-

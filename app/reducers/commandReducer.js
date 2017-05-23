@@ -1,5 +1,6 @@
 import {RECEIVE_COMMAND} from '../constants';
 
+// TODO remove selectedCommand, it is temporary placeholder
 const initialState = {
   selectedCommand: ''
 };
