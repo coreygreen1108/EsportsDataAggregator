@@ -1,6 +1,6 @@
 'use strict';
-let sessionManager = require('../utils/sessionManager');
-let db = require('../../db');
+let sessionManager = require('../../../sessionManager');
+let db = require('../../../../../db');
 let God = db.model('God');
 let GodInfo = db.model('GodInfo');
 

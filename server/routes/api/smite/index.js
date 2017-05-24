@@ -3,8 +3,8 @@
 let router = require('express').Router();
 let request = require('request-promise');
 let sessionManager = require('../../../utils/sessionManager');
-let updateGodApiInterface = require('../../../utils/updateGodModel');
-let updateStats = require('../../../utils/api/smite/generateGodStats');
+let updateGodApiInterface = require('../../../utils/api/smite/db-write/updateGodModel');
+let updateStats = require('../../../utils/api/smite/db-write/generateGodStats');
 
 module.exports = router; 
 
