@@ -27,7 +27,6 @@ router.get('/updateStats/:queue/:date/:hour', (req, res) => {
 })
 
 router.get('/:system/:method', (req, res) => {
-	console.log('prove lee that this was hit when we gave system and method')
 	let system = req.params.system;
 	let method = req.params.method;
 	let additionalData = req.query; 
