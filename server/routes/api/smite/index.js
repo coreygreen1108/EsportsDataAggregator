@@ -15,7 +15,7 @@ router.get('/updateGods', (req, res) => {
 	.catch(function(err){
 		console.log('ERROR', err);
 	})
-})
+});
 
 router.get('/updateStats/:queue/:date/:hour', (req, res) => {
 	updateStats(req.params.queue,req.params.date,req.params.hour).then(function(){
@@ -24,7 +24,7 @@ router.get('/updateStats/:queue/:date/:hour', (req, res) => {
 	.catch(function(err){
 		console.log('ERROR', err);
 	})
-})
+});
 
 router.get('/:system/:method', (req, res) => {
 	let system = req.params.system;
