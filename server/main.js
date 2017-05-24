@@ -4,7 +4,7 @@ let express = require('express');
 let server = express();
 let db = require('../db');
 
-db.sync({force: true})
+db.sync(/*{force: true}*/)
 .then(function(){
 	return server.listen(8080);
 }).then(function(){
