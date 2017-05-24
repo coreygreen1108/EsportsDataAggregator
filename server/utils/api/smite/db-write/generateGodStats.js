@@ -46,7 +46,7 @@ module.exports = async function(a,b,c){
 	let entry = await Entry.create({
 		numberOfGames: queue.length,
 		matchIds: queue.map(match => +match)
-	})
+	});
 
 	console.log('NUMBER OF GAMES', queue.length);
 	//go through queue of matches one by one. 
