@@ -17,8 +17,8 @@ router.get('/updateGods', (req, res) => {
 	})
 })
 
-router.get('/updateStats/:a/:b/:c', (req, res) => {
-	updateStats(req.params.a,req.params.b,req.params.c).then(function(){
+router.get('/updateStats/:queue/:date/:hour', (req, res) => {
+	updateStats(req.params.queue,req.params.date,req.params.hour).then(function(){
 		res.send('Process Complete');
 	})
 	.catch(function(err){
