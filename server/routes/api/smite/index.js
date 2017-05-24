@@ -14,7 +14,7 @@ router.get('/updateGods', (req, res) => {
 	})
 	.catch(function(err){
 		console.log('ERROR', err);
-	})
+	});
 });
 
 router.get('/updateStats/:queue/:date/:hour', (req, res) => {
@@ -23,7 +23,7 @@ router.get('/updateStats/:queue/:date/:hour', (req, res) => {
 	})
 	.catch(function(err){
 		console.log('ERROR', err);
-	})
+	});
 });
 
 router.get('/:system/:method', (req, res) => {
