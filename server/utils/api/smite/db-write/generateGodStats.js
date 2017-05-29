@@ -17,10 +17,13 @@ module.exports = async function(queueNum,date,hour){
 		hour: hour || '5'
 	}; 
 	console.log(queueNum, date, hour);
+
+	//Acquire entire queue of games in date range and remove all incomplete games.
 	let queueStartMarker = new Date(); 
 	let queue = await sessionManager.makeRequest(system, method, 'Json', additionalData);
 	queue = queue.filter(game => game.Active_Flag == 'n').map(game => game.Match); 
 	console.log('queue filtering stop', new Date() - queueStartMarker);
+
 	//assemble base object
 	let godAssembleTime = new Date();
 	let godObj = {};
@@ -57,7 +60,7 @@ module.exports = async function(queueNum,date,hour){
 			totalTime: 0,
 		}
 	});
-	console.log('God Object Assembly time stamp', new Date() - godAssembleTime)
+	console.log('God Object Assembly time stamp', new Date() - godAssembleTime);
 	
 	//create an entry for the queue of matches in question. 
 	let entry = await Entry.create({
@@ -68,10 +71,10 @@ module.exports = async function(queueNum,date,hour){
 	});
 
 	console.log('NUMBER OF GAMES', queue.length);
-	console.log('TOTAL TIME OF SETUP FOR MAIN', new Date() - startTime)
+	console.log('TOTAL TIME OF SETUP FOR MAIN', new Date() - startTime);
 	//go through queue of matches one by one. 
 	let keyConverter = null; 
-	for(let i = 0; i < 10; i++){
+	for(let i = 0; i < queue.length; i++){
 		let matchId = queue[i];
 		let gameTimer = new Date();
 		console.log('Game', i); 
@@ -111,7 +114,7 @@ module.exports = async function(queueNum,date,hour){
 			if(Number(player.Surrendered)) god.timesSurrendered++; 
 
 		}); 
-		console.log(i, 'time for gameObj updates', new Date() - gameTimer)
+		console.log(i, 'time for gameObj updates', new Date() - gameTimer);
 
 		//take one player from game, and use info to affect ban stats. 
 		let player = gameInfo[0];
@@ -120,7 +123,7 @@ module.exports = async function(queueNum,date,hour){
 				godObj[player[`Ban${i}Id`]].timesBanned++;
 			}
 		}
-		console.log(i, 'time for ban gameObj updates', new Date() - gameTimer)
+		console.log(i, 'time for ban gameObj updates', new Date() - gameTimer);
 	}
 	console.log('COMPLETION OF GAMEOBJ UPDATING', new Date() - startTime);
 	
