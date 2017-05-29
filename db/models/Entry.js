@@ -9,9 +9,8 @@ var Entry = db.define('Entry', {
   },
   numberOfGames: Sequelize.INTEGER,
   matchIds: Sequelize.ARRAY(Sequelize.INTEGER),
-  gameWindowOpen: Sequelize.DATE,
-  gameWindowClose: Sequelize.DATE
-
+  gameWindowDate: Sequelize.STRING,
+  gameWindowHour: Sequelize.INTEGER
 });
 
 module.exports = Entry;
