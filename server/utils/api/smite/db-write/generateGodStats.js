@@ -108,7 +108,7 @@ module.exports = async function(queueNum,date,hour){
 			}
 		
 			//Complex Data Relationship Handler
-			if(god.Win_Status === 'Winner') god.wins++;
+			if(player.Win_Status === 'Winner') god.wins++;
 			else god.losses++; 
 
 			if(Number(player.Surrendered)) god.timesSurrendered++; 
