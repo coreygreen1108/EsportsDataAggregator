@@ -18,12 +18,8 @@ router.get('/updateGods', (req, res) => {
 });
 
 router.get('/updateStats/:queue/:date/:hour', (req, res) => {
-	updateStats(req.params.queue,req.params.date,req.params.hour).then(function(){
-		res.send('Process Complete');
-	})
-	.catch(function(err){
-		console.log('ERROR', err);
-	});
+	res.send('process in progress.')
+	updateStats(req.params.queue,req.params.date,req.params.hour);
 });
 
 router.get('/:system/:method', (req, res) => {
