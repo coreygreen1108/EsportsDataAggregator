@@ -15,8 +15,8 @@ module.exports = {
 	},
 	getmatchidsbyqueue: {
 		format: ['queue', 'date', 'hour'],
-		queue: '429'
-	}, 
+		queue: '451'
+	},
 	getmatchhistory: {
 		format: ['player']
 	},

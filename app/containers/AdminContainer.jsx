@@ -1,9 +1,10 @@
 'use strict';
 import React from 'react';
 import Selector from '../components/Selector';
+import Input from '../components/Input';
 import {connect} from 'react-redux';
-import {systems, commands} from '../constants';
-import {fetchAPIRequests} from '../action-creators/apiRequests';
+import {systems} from '../constants';
+import {fetchAPIRequestMethods, fetchAPIRequest} from '../action-creators/apiRequests';
 import { withRouter } from 'react-router';
 
 const mapStateToProps = state => {
@@ -15,9 +16,14 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 
   return {
-      fetchingAPIRequests() {
-        dispatch(fetchAPIRequests());
+      fetchingAPIRequestMethods() {
+        dispatch(fetchAPIRequestMethods());
+      },
+
+      fetchingAPIRequest(localStateObj, queryObj) {
+        dispatch(fetchAPIRequest(localStateObj, queryObj));
       }
+
     };
 
 };
@@ -25,7 +31,7 @@ const mapDispatchToProps = dispatch => {
 class Admin extends React.Component  {
    constructor(props){
     super(props);
-    this.state = {system: 'Xbox', method: 'getgodranks', target: ''};
+    this.state = {system: 'Xbox', method: 'getgods'};
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onSubmitHandler = this.onSubmitHandler.bind(this);
    }
@@ -35,32 +41,43 @@ class Admin extends React.Component  {
   }
 
   onSubmitHandler(event){
-    const eventVal = event.target.value;
+    event.preventDefault();
+    // call a function with my current local state
+    // let paramArr = this.props.apiRequestMethods[this.state.method];
+
+    console.log('getting here', this.state, this.props.apiRequestMethods[this.state.method]);
+    this.props.fetchingAPIRequest(this.state, this.props.apiRequestMethods[this.state.method]);
+    // const eventVal = event.target.value;
 
   }
 
   componentWillMount(){
-   if (!this.props.apiRequestMethods) this.props.fetchingAPIRequests();
+   if (!this.props.apiRequestMethods) this.props.fetchingAPIRequestMethods();
   }
    render() {
 
-    console.log('props', this.props);
+    let methodArr = this.props.apiRequestMethods ? Object.keys(this.props.apiRequestMethods) : [];
+       // if (event.target.name === 'method' && this.props.apiRequestMethods.format.length > 1)
+    // console.log('apiRequestMethodsObj', this.props.apiRequestMethods);
+    // console.log(this.state);
 
     return (
 
      <div>
         <h1>Esports Advanced Stats Admin API Requests</h1>
-          <form action="/godinfo" method="get" onSubmit={this.onSumbitHandler}>
+          <form onSubmit={this.onSubmitHandler}>
             <div>
               <Selector dataArr={systems} name={'system'} onChangeHandler={this.onChangeHandler} />
             </div>
             <div>
-               <Selector dataArr={commands} name={'method'} onChangeHandler={this.onChangeHandler} />
+               <Selector dataArr={methodArr} name={'method'} onChangeHandler={this.onChangeHandler} />
             </div>
             <div>
-              <input id="target" type="text" name="target" placeholder="Enter Player Target" />
+               {this.props.apiRequestMethods && this.props.apiRequestMethods[this.state.method].format.map(formatType =>
+                  <Input key={formatType} name={formatType} onChangeHandler={this.onChangeHandler} />)
+               }
             </div>
-            <button type="button" id="search">Find Data!</button>
+            <button type="submit" id="search">Find Data!</button>
           </form>
 
         </div>
@@ -71,6 +88,6 @@ class Admin extends React.Component  {
 
 }
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Admin));
-// export default connect(mapStateToProps, mapDispatchToProps)(Admin);
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Admin));
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);
 

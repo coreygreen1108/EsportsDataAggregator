@@ -5,6 +5,8 @@ let server = express();
 let db = require('../db');
 const path = require('path');
 
+let bodyParser = require('body-parser');
+
 db.sync(/*{force: true}*/)
 .then(function(){
 	return server.listen(8080);
@@ -12,6 +14,8 @@ db.sync(/*{force: true}*/)
 	console.log('dis server is live on port 8080 maaannnn (Jamaican accent)');
 });
 
+// server.use(bodyParser.json());
+// server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use('/', express.static(__dirname + '/../public'));
 

@@ -1,7 +1,8 @@
-import {RECEIVE_API_REQUESTS} from '../constants';
+import {RECEIVE_API_REQUEST_METHODS, RECEIVE_API_DATA} from '../constants';
 
 const initialState = {
-  defaultMethodData: null
+  defaultMethodData: null,
+  godRanks: null
 };
 
 export default function (state = initialState, action) {
@@ -10,8 +11,12 @@ export default function (state = initialState, action) {
 
   switch (action.type) {
 
-    case RECEIVE_API_REQUESTS:
+    case RECEIVE_API_REQUEST_METHODS:
       newState.defaultMethodData = action.requestMethods;
+      break;
+
+    case RECEIVE_API_DATA:
+      newState.godRanks = action.apiData;
       break;
 
     default:
