@@ -2,7 +2,7 @@ import {RECEIVE_API_REQUEST_METHODS, RECEIVE_API_DATA} from '../constants';
 
 const initialState = {
   defaultMethodData: null,
-  godRanks: null
+   currentData: {}
 };
 
 export default function (state = initialState, action) {
@@ -16,7 +16,7 @@ export default function (state = initialState, action) {
       break;
 
     case RECEIVE_API_DATA:
-      newState.godRanks = action.apiData;
+      newState.currentData = action.apiData;
       break;
 
     default:

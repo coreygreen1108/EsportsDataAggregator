@@ -5,7 +5,6 @@ import Input from '../components/Input';
 import {connect} from 'react-redux';
 import {systems} from '../constants';
 import {fetchAPIRequestMethods, fetchAPIRequest} from '../action-creators/apiRequests';
-import { withRouter } from 'react-router';
 
 const mapStateToProps = state => {
   return {
@@ -14,21 +13,17 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => {
-
   return {
       fetchingAPIRequestMethods() {
         dispatch(fetchAPIRequestMethods());
       },
-
-      fetchingAPIRequest(localStateObj, queryObj) {
-        dispatch(fetchAPIRequest(localStateObj, queryObj));
+      fetchingAPIRequest(localStateObj, formatObj) {
+        dispatch(fetchAPIRequest(localStateObj, formatObj));
       }
-
     };
-
 };
 
-class Admin extends React.Component  {
+class Admin extends React.Component {
    constructor(props){
     super(props);
     this.state = {system: 'Xbox', method: 'getgods'};
@@ -42,24 +37,16 @@ class Admin extends React.Component  {
 
   onSubmitHandler(event){
     event.preventDefault();
-    // call a function with my current local state
-    // let paramArr = this.props.apiRequestMethods[this.state.method];
-
-    console.log('getting here', this.state, this.props.apiRequestMethods[this.state.method]);
     this.props.fetchingAPIRequest(this.state, this.props.apiRequestMethods[this.state.method]);
-    // const eventVal = event.target.value;
-
   }
 
   componentWillMount(){
    if (!this.props.apiRequestMethods) this.props.fetchingAPIRequestMethods();
   }
-   render() {
+
+  render() {
 
     let methodArr = this.props.apiRequestMethods ? Object.keys(this.props.apiRequestMethods) : [];
-       // if (event.target.name === 'method' && this.props.apiRequestMethods.format.length > 1)
-    // console.log('apiRequestMethodsObj', this.props.apiRequestMethods);
-    // console.log(this.state);
 
     return (
 
@@ -74,7 +61,7 @@ class Admin extends React.Component  {
             </div>
             <div>
                {this.props.apiRequestMethods && this.props.apiRequestMethods[this.state.method].format.map(formatType =>
-                  <Input key={formatType} name={formatType} onChangeHandler={this.onChangeHandler} />)
+                  <Input key={formatType} name={formatType} onChangeHandler={this.onChangeHandler} value={this.state[formatType] || ''} />)
                }
             </div>
             <button type="submit" id="search">Find Data!</button>
@@ -88,6 +75,5 @@ class Admin extends React.Component  {
 
 }
 
-// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Admin));
 export default connect(mapStateToProps, mapDispatchToProps)(Admin);
 

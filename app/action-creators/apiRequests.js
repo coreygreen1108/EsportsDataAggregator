@@ -21,37 +21,20 @@ export const receivedAPIData = (apiData) => ({
   apiData
 });
 
-
-export const fetchAPIRequest = (obj, queryObj) => {
-   // if (queryObj.lengt)
-   // let queryStr = '';
-   // queryObj.forEach(format => {
-   //  queryStr += format
-   //  })
-   let urlQuery = queryObj.format[0];
-   let defaultVal = obj[urlQuery] ? obj[urlQuery] : queryObj[urlQuery];
-   // if (!obj[urlQuery])
-
+export const fetchAPIRequest = (obj, formatObj) => {
+   let urlQuery = formatObj.format;
+   let urlQueryStr = '';
+   urlQuery.forEach(format => {
+    let defaultVal = obj[format] || formatObj[format];
+    urlQueryStr += `${format}=${defaultVal}&`;
+   });
+   urlQueryStr = urlQueryStr.slice(0, -1);
    return dispatch => {
-    axios.get(`/api/smite/${obj.system}/${obj.method}?${urlQuery}=${defaultVal}`)
+    axios.get(`/api/smite/${obj.system}/${obj.method}?${urlQueryStr}`)
     .then(response => {
-      console.log('res', response, response.data);
       dispatch(receivedAPIData(response.data));
     })
     .catch(console.error.bind(console));
   };
 
 };
-
-// router.get('/:system/:method', (req, res) => {
-//   let system = req.params.system;
-//   let method = req.params.method;
-//   let additionalData = req.query;
-//   sessionManager.makeRequest(system, method, 'Json', additionalData)
-//   .then(function(info){
-//     res.send(info);
-//   })
-//   .catch(function(err){
-//     console.log('ERROR', err);
-//   });
-// });
