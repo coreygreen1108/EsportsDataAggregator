@@ -3,6 +3,7 @@
 let express = require('express');
 let server = express();
 let db = require('../db');
+const path = require('path');
 
 db.sync(/*{force: true}*/)
 .then(function(){
@@ -15,6 +16,6 @@ server.use('/', express.static(__dirname + '/../public'));
 
 server.use('/api', require('./routes/api'));
 
-server.get('/', function(req, res){
-	res.render('index.html');
-})
+server.get('/*', function(req, res){
+  res.sendFile(path.join(__dirname + '/../public', 'index.html'));
+});
